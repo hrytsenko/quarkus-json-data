@@ -1,2 +1,2 @@
-# Quarkus Data JSON
+# Quarkus JSON Data
  
