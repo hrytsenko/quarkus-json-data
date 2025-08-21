@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:8080
+
+### Get movies
+GET {{baseUrl}}/movies
+Accept: application/json
+
+### Add Thing
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "imdb": "0084787",
+  "title": "The Thing",
+  "year": 1982
+}
+
+### Find Thing
+GET {{baseUrl}}/movies/0084787
+Accept: application/json
+
+### Delete Thing
+DELETE {{baseUrl}}/movies/0084787
+
+### Add Alien
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "imdb": "0078748",
+  "title": "Alien",
+  "year": 1979
+}
+
+### Find Alien
+GET {{baseUrl}}/movies/0078748
+Accept: application/json
+
+### Delete Alien
+DELETE {{baseUrl}}/movies/0078748
