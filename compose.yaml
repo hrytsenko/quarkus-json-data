@@ -1,0 +1,27 @@
+networks:
+  quarkus-json-data:
+
+services:
+  pg:
+    container_name: pg
+    image: postgres
+    environment:
+      - POSTGRES_DB=movies
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - quarkus-json-data
+    ports:
+      - '5432:5432'
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - quarkus-json-data
+    ports:
+      - '15432:80'
+    depends_on:
+      - pg

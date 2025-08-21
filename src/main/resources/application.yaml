@@ -1,2 +1,11 @@
 app:
   mode: 'standalone'
+
+quarkus:
+  datasource:
+    movies:
+      db-kind: pg
+      jdbc:
+        url: jdbc:postgresql://localhost:5432/movies
+      username: postgres
+      password: postgres

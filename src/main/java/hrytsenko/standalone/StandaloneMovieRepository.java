@@ -26,7 +26,7 @@ class StandaloneMovieRepository implements MovieRepository {
 
   @PostConstruct
   void init() {
-    log.info("Starting in standalone mode");
+    log.info("Starting standalone repository");
     database = Nitrite.builder()
         .loadModule(new JacksonMapperModule())
         .openOrCreate();
@@ -35,22 +35,26 @@ class StandaloneMovieRepository implements MovieRepository {
 
   @Override
   public List<Movie> findAll() {
+    log.info("Find all movies");
     return movies.find().toList();
   }
 
   @Override
   public Optional<Movie> findMovie(String imdb) {
+    log.info("Find movie by imdb {}", imdb);
     return Optional.ofNullable(
         movies.find(byImdb(imdb)).firstOrNull());
   }
 
   @Override
   public void createMovie(Movie movie) {
+    log.info("Create movie {}", movie);
     movies.insert(movie);
   }
 
   @Override
   public void deleteMovie(String imdb) {
+    log.info("Delete movie by imdb {}", imdb);
     movies.remove(byImdb(imdb));
   }
 
