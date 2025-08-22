@@ -7,7 +7,10 @@ import hrytsenko.MovieRepository;
 import io.quarkus.arc.properties.IfBuildProperty;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Converter;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Id;
@@ -28,8 +31,6 @@ import org.hibernate.type.SqlTypes;
 @IfBuildProperty(name = "app.mode", stringValue = "production")
 public class ProductionMovieRepository implements MovieRepository {
 
-  private final ObjectMapper objectMapper = new ObjectMapper();
-
   @PersistenceContext(unitName = "movies")
   EntityManager entityManager;
 
@@ -48,7 +49,6 @@ public class ProductionMovieRepository implements MovieRepository {
         .getResultList();
     return entities.stream()
         .map(MovieEntity::getMovie)
-        .map(it -> objectMapper.convertValue(it, Movie.class))
         .toList();
   }
 
@@ -63,7 +63,6 @@ public class ProductionMovieRepository implements MovieRepository {
         .getResultList();
     return entities.stream()
         .map(MovieEntity::getMovie)
-        .map(it -> objectMapper.convertValue(it, Movie.class))
         .findFirst();
   }
 
@@ -71,8 +70,7 @@ public class ProductionMovieRepository implements MovieRepository {
   @Override
   public void createMovie(Movie movie) {
     log.info("Create movie {}", movie);
-    var entity = new MovieEntity(movie.imdb(), objectMapper.valueToTree(movie));
-    entityManager.persist(entity);
+    entityManager.persist(MovieEntity.of(movie));
   }
 
   @Transactional
@@ -91,6 +89,10 @@ public class ProductionMovieRepository implements MovieRepository {
   @AllArgsConstructor
   static class MovieEntity {
 
+    static MovieEntity of(Movie movie) {
+      return new MovieEntity(movie.imdb(), movie);
+    }
+
     @Getter
     @Id
     private String id;
@@ -98,7 +100,25 @@ public class ProductionMovieRepository implements MovieRepository {
     @Getter
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "movie", columnDefinition = "jsonb")
-    private JsonNode movie;
+    @Convert(converter = MovieConverter.class)
+    private Movie movie;
+
+  }
+
+  @Converter
+  static class MovieConverter implements AttributeConverter<Movie, JsonNode> {
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public JsonNode convertToDatabaseColumn(Movie movie) {
+      return objectMapper.valueToTree(movie);
+    }
+
+    @Override
+    public Movie convertToEntityAttribute(JsonNode dbData) {
+      return objectMapper.convertValue(dbData, Movie.class);
+    }
 
   }
 
