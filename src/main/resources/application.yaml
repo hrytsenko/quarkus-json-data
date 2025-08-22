@@ -1,5 +1,5 @@
 app:
-  mode: 'standalone'
+  mode: 'production'
 
 quarkus:
   datasource:
@@ -9,3 +9,8 @@ quarkus:
         url: jdbc:postgresql://localhost:5432/movies
       username: postgres
       password: postgres
+  hibernate-orm:
+    movies:
+      datasource: movies
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      packages: hrytsenko
