@@ -7,9 +7,9 @@ public interface MovieRepository {
 
   List<Movie> findAll();
 
-  void createMovie(Movie movie);
-
   Optional<Movie> findMovie(String imdb);
+
+  void createMovie(Movie movie);
 
   void deleteMovie(String imdb);
 
