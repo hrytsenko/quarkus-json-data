@@ -11,8 +11,7 @@ Content-Type: application/json
 {
   "imdb": "0084787",
   "title": "The Thing",
-  "year": 1982,
-  "casts": []
+  "year": 1982
 }
 
 ### Find Thing
