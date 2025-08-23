@@ -1,4 +1,4 @@
 [environments.local]
 url = "jdbc:postgresql://localhost:5432/movies"
-user = "postgres"
-password = "postgres"
+user = "admin"
+password = "s3cr3t"

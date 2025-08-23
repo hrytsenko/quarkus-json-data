@@ -7,8 +7,8 @@ services:
     image: postgres
     environment:
       - POSTGRES_DB=movies
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=s3cr3t
     networks:
       - quarkus-json-data
     ports:

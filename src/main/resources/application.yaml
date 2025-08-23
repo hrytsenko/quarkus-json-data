@@ -6,11 +6,11 @@ quarkus:
     movies:
       db-kind: pg
       jdbc:
-        url: jdbc:postgresql://localhost:5432/movies
-      username: postgres
-      password: postgres
+        url: ${app.database.movies.url}
+      username: ${app.database.movies.username}
+      password: ${app.database.movies.password}
   hibernate-orm:
     movies:
       datasource: movies
-      dialect: org.hibernate.dialect.PostgreSQLDialect
       packages: hrytsenko
+      dialect: org.hibernate.dialect.PostgreSQLDialect
