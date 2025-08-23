@@ -11,12 +11,27 @@ Content-Type: application/json
 {
   "imdb": "0084787",
   "title": "The Thing",
-  "year": 1982
+  "year": 1982,
+  "casts": []
 }
 
 ### Find Thing
 GET {{baseUrl}}/movies/0084787
 Accept: application/json
+
+### Update Thing
+PUT {{baseUrl}}/movies/0084787
+Content-Type: application/json
+
+{
+  "imdb": "0084787",
+  "title": "The Thing",
+  "year": 1982,
+  "casts": [
+    "Kurt Russell",
+    "Wilford Brimley"
+  ]
+}
 
 ### Delete Thing
 DELETE {{baseUrl}}/movies/0084787
@@ -28,12 +43,27 @@ Content-Type: application/json
 {
   "imdb": "0078748",
   "title": "Alien",
-  "year": 1979
+  "year": 1979,
+  "casts": []
 }
 
 ### Find Alien
 GET {{baseUrl}}/movies/0078748
 Accept: application/json
+
+### Update Alien
+PUT {{baseUrl}}/movies/0078748
+Content-Type: application/json
+
+{
+  "imdb": "0078748",
+  "title": "Alien",
+  "year": 1979,
+  "casts": [
+    "Sigourney Weaver",
+    "Tom Skerritt"
+  ]
+}
 
 ### Delete Alien
 DELETE {{baseUrl}}/movies/0078748

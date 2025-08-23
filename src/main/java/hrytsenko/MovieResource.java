@@ -6,6 +6,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -40,6 +41,18 @@ public class MovieResource {
   public Movie getMovie(@PathParam("imdb") String imdb) {
     return repository.findMovie(imdb)
         .orElseThrow(() -> new ClientErrorException("Movie not found", Response.Status.NOT_FOUND));
+  }
+
+  @PUT
+  @Path("/{imdb}")
+  public void updateMovie(@PathParam("imdb") String imdb, Movie movie) {
+    if (!imdb.equals(movie.imdb())) {
+      throw new ClientErrorException("Movie mismatch", Response.Status.BAD_REQUEST);
+    }
+    if (repository.findMovie(imdb).isEmpty()) {
+      throw new ClientErrorException("Movie not found", Response.Status.NOT_FOUND);
+    }
+    repository.updateMovie(movie);
   }
 
   @DELETE

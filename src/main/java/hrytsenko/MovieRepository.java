@@ -11,6 +11,8 @@ public interface MovieRepository {
 
   void createMovie(Movie movie);
 
+  void updateMovie(Movie movie);
+
   void deleteMovie(String imdb);
 
 }

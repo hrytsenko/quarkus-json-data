@@ -75,6 +75,17 @@ public class ProductionMovieRepository implements MovieRepository {
 
   @Transactional
   @Override
+  public void updateMovie(Movie movie) {
+    log.info("Update movie {}", movie);
+    var query = "UPDATE movies SET movie = :movie WHERE movie->>'imdb' = :imdb";
+    entityManager.createNativeQuery(query)
+        .setParameter("imdb", movie.imdb())
+        .setParameter("movie", movie)
+        .executeUpdate();
+  }
+
+  @Transactional
+  @Override
   public void deleteMovie(String imdb) {
     log.info("Delete movie by imdb {}", imdb);
     var query = "DELETE FROM movies WHERE movie->>'imdb' = :imdb";

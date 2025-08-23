@@ -53,6 +53,12 @@ class StandaloneMovieRepository implements MovieRepository {
   }
 
   @Override
+  public void updateMovie(Movie movie) {
+    log.info("Update movie {}", movie);
+    movies.update(byImdb(movie.imdb()), movie);
+  }
+
+  @Override
   public void deleteMovie(String imdb) {
     log.info("Delete movie by imdb {}", imdb);
     movies.remove(byImdb(imdb));
