@@ -1,3 +1,6 @@
+[flyway]
+cleanDisabled = false
+
 [environments.local]
 url = "jdbc:postgresql://localhost:5432/movies"
 user = "admin"
