@@ -13,4 +13,3 @@ quarkus:
     movies:
       datasource: movies
       packages: hrytsenko
-      dialect: org.hibernate.dialect.PostgreSQLDialect

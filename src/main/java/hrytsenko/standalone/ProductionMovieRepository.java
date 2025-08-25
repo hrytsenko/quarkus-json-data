@@ -29,7 +29,7 @@ import org.hibernate.type.SqlTypes;
 @Slf4j
 @ApplicationScoped
 @IfBuildProperty(name = "app.mode", stringValue = "production")
-public class ProductionMovieRepository implements MovieRepository {
+class ProductionMovieRepository implements MovieRepository {
 
   @PersistenceContext(unitName = "movies")
   EntityManager entityManager;
