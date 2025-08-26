@@ -1,9 +1,7 @@
-package hrytsenko.standalone;
+package hrytsenko;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hrytsenko.Movie;
-import hrytsenko.MovieRepository;
 import io.quarkus.arc.properties.IfBuildProperty;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -28,7 +26,7 @@ import org.hibernate.type.SqlTypes;
 
 @Slf4j
 @ApplicationScoped
-@IfBuildProperty(name = "app.mode", stringValue = "production")
+@IfBuildProperty(name = "app.mode", stringValue = "production", enableIfMissing = true)
 class ProductionMovieRepository implements MovieRepository {
 
   @PersistenceContext(unitName = "movies")

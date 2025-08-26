@@ -1,9 +1,7 @@
-package hrytsenko.standalone;
+package hrytsenko;
 
 import static org.dizitart.no2.filters.FluentFilter.where;
 
-import hrytsenko.Movie;
-import hrytsenko.MovieRepository;
 import io.quarkus.arc.properties.IfBuildProperty;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;

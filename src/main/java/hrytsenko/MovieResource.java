@@ -15,7 +15,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/movies")
-public class MovieResource {
+class MovieResource {
 
   @Inject
   MovieRepository repository;

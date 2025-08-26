@@ -3,7 +3,7 @@ package hrytsenko;
 import java.util.List;
 import java.util.Optional;
 
-public interface MovieRepository {
+interface MovieRepository {
 
   List<Movie> findAll();
 
