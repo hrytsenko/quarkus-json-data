@@ -10,13 +10,13 @@
 
 Development:
 
-* [Nitrite](https://nitrite.dizitart.com/index.html) — standalone database.
+* [Nitrite](https://nitrite.dizitart.com/) — standalone database.
 * [PostgreSQL](https://www.postgresql.org/) — production database.
 * [Hibernate](https://hibernate.org/orm/) — persistence framework.
-* [Flyway](https://documentation.red-gate.com/flyway) — migration tool.
+* [Flyway](https://documentation.red-gate.com/flyway/) — migration tool.
 
 Testing:
 
-* [REST-assured](https://rest-assured.io/) — API testing.
-* [JSONUnit](https://github.com/lukas-krecan/JsonUnit) — JSON comparison.
+* [REST Assured](https://rest-assured.io/) — API testing.
+* [JsonUnit](https://github.com/lukas-krecan/JsonUnit/) — JSON comparison.
 * [Testcontainers](https://testcontainers.com/) — environment provisioning.
