@@ -1,5 +1,5 @@
 app:
-  mode: 'standalone'
+  mode: 'production'
   database:
     movies:
       url: jdbc:postgresql://localhost:5432/movies
