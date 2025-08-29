@@ -73,12 +73,12 @@ class MovieTest {
         .when().post("/movies")
         .then().statusCode(204);
 
-    var movies = given()
+    var actualMovies = given()
         .when().get("/movies")
         .then().statusCode(200)
         .extract().asString();
 
-    assertThatJson(movies)
+    assertThatJson(actualMovies)
         .isEqualTo("""
             [
               {
@@ -90,12 +90,12 @@ class MovieTest {
             ]
             """);
 
-    var movie = given()
+    var actualMovie = given()
         .when().get("/movies/0084787")
         .then().statusCode(200)
         .extract().asString();
 
-    assertThatJson(movie)
+    assertThatJson(actualMovie)
         .isEqualTo("""
             {
               "imdb": "0084787",
@@ -125,12 +125,12 @@ class MovieTest {
         .when().put("/movies/0084787")
         .then().statusCode(204);
 
-    var movies = given()
+    var actualMovies = given()
         .when().get("/movies")
         .then().statusCode(200)
         .extract().asString();
 
-    assertThatJson(movies)
+    assertThatJson(actualMovies)
         .isEqualTo("""
             [
               {
@@ -145,12 +145,12 @@ class MovieTest {
             ]
             """);
 
-    var movie = given()
+    var actualMovie = given()
         .when().get("/movies/0084787")
         .then().statusCode(200)
         .extract().asString();
 
-    assertThatJson(movie)
+    assertThatJson(actualMovie)
         .isEqualTo("""
             {
               "imdb": "0084787",
@@ -171,12 +171,12 @@ class MovieTest {
         .when().delete("/movies/0084787")
         .then().statusCode(204);
 
-    var movies = given()
+    var actualMovies = given()
         .when().get("/movies")
         .then().statusCode(200)
         .extract().asString();
 
-    assertThatJson(movies)
+    assertThatJson(actualMovies)
         .isEqualTo("""
             []
             """);
