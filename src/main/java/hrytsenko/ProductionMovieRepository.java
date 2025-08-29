@@ -38,7 +38,7 @@ class ProductionMovieRepository implements MovieRepository {
   }
 
   @Override
-  public List<Movie> findAll() {
+  public List<Movie> listMovies() {
     log.info("Find all movies");
     var query = "SELECT * FROM movies";
     @SuppressWarnings("unchecked")
@@ -102,7 +102,6 @@ class ProductionMovieRepository implements MovieRepository {
       return new MovieEntity(movie.imdb(), movie);
     }
 
-    @Getter
     @Id
     private String id;
 
@@ -117,16 +116,16 @@ class ProductionMovieRepository implements MovieRepository {
   @Converter
   static class MovieConverter implements AttributeConverter<Movie, JsonNode> {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Override
     public JsonNode convertToDatabaseColumn(Movie movie) {
-      return objectMapper.valueToTree(movie);
+      return MAPPER.valueToTree(movie);
     }
 
     @Override
-    public Movie convertToEntityAttribute(JsonNode dbData) {
-      return objectMapper.convertValue(dbData, Movie.class);
+    public Movie convertToEntityAttribute(JsonNode json) {
+      return MAPPER.convertValue(json, Movie.class);
     }
 
   }

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 interface MovieRepository {
 
-  List<Movie> findAll();
+  List<Movie> listMovies();
 
   Optional<Movie> findMovie(String imdb);
 

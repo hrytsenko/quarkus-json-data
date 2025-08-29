@@ -22,8 +22,8 @@ class MovieResource {
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public List<Movie> getMovies() {
-    return repository.findAll();
+  public List<Movie> listMovies() {
+    return repository.listMovies();
   }
 
   @POST

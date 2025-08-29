@@ -10,7 +10,7 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.common.mapper.JacksonMapperModule;
-import org.dizitart.no2.filters.NitriteFilter;
+import org.dizitart.no2.filters.Filter;
 import org.dizitart.no2.repository.ObjectRepository;
 
 @Slf4j
@@ -32,7 +32,7 @@ class StandaloneMovieRepository implements MovieRepository {
   }
 
   @Override
-  public List<Movie> findAll() {
+  public List<Movie> listMovies() {
     log.info("Find all movies");
     return movies.find().toList();
   }
@@ -62,7 +62,7 @@ class StandaloneMovieRepository implements MovieRepository {
     movies.remove(byImdb(imdb));
   }
 
-  private static NitriteFilter byImdb(String imdb) {
+  private static Filter byImdb(String imdb) {
     return where("imdb").eq(imdb);
   }
 
