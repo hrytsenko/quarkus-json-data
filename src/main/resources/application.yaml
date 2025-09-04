@@ -13,3 +13,8 @@ quarkus:
     movies:
       datasource: movies
       packages: hrytsenko
+  container-image:
+    builder: docker
+    group: hrytsenko
+    name: movies
+    tag: latest
