@@ -5,3 +5,7 @@ cleanDisabled = false
 url = "jdbc:postgresql://localhost:5432/movies"
 user = "admin"
 password = "s3cr3t"
+[environments.docker]
+url = "jdbc:postgresql://pg:5432/movies"
+user = "admin"
+password = "s3cr3t"
