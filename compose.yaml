@@ -1,7 +1,7 @@
 services:
   movies:
     container_name: movies
-    image: hrytsenko/movies:latest
+    image: hrytsenko/movies
     ports:
       - '8080:8080'
     volumes:
@@ -41,7 +41,7 @@ services:
         condition: service_healthy
   flyway:
     container_name: flyway
-    image: flyway/flyway:latest
+    image: flyway/flyway
     volumes:
       - ./flyway.toml:/flyway/conf/flyway.toml:ro
       - ./migrations:/flyway/migrations:ro
