@@ -13,6 +13,9 @@ quarkus:
     movies:
       datasource: movies
       packages: hrytsenko
+    mapping:
+      format:
+        global: ignore
   container-image:
     builder: docker
     group: hrytsenko
