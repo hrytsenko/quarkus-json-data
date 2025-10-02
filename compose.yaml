@@ -10,6 +10,11 @@ services:
       - APP_DATABASE_MOVIES_URL=jdbc:postgresql://pg:5432/movies
       - APP_DATABASE_MOVIES_USERNAME=admin
       - APP_DATABASE_MOVIES_PASSWORD=s3cr3t
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/q/health/ready" ]
+      interval: 5s
+      retries: 6
+      start_period: 5s
     depends_on:
       pg:
         condition: service_healthy
@@ -37,8 +42,8 @@ services:
     ports:
       - '15432:80'
     depends_on:
-      pg:
-        condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
   flyway:
     container_name: flyway
     image: flyway/flyway
