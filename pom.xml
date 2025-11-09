@@ -10,9 +10,9 @@
   <properties>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.28.1</quarkus.platform.version>
-    <compiler-plugin.version>3.14.0</compiler-plugin.version>
-    <surefire-plugin.version>3.5.3</surefire-plugin.version>
+    <quarkus.platform.version>3.29.0</quarkus.platform.version>
+    <compiler-plugin.version>3.14.1</compiler-plugin.version>
+    <surefire-plugin.version>3.5.4</surefire-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.release>21</maven.compiler.release>
@@ -87,7 +87,13 @@
     <dependency>
       <groupId>net.javacrumbs.json-unit</groupId>
       <artifactId>json-unit-assertj</artifactId>
-      <version>4.1.1</version>
+      <version>5.0.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.minidev</groupId>
+      <artifactId>json-smart</artifactId>
+      <version>2.6.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
