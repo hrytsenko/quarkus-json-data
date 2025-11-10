@@ -16,9 +16,7 @@ services:
       retries: 6
       start_period: 5s
     depends_on:
-      pg:
-        condition: service_healthy
-      flyway:
+      pg-init:
         condition: service_completed_successfully
   pg:
     container_name: pg
@@ -33,19 +31,8 @@ services:
       test: [ "CMD-SHELL", "pg_isready -U admin -d register" ]
       interval: 2s
       start_period: 3s
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@example.com
-      - PGADMIN_DEFAULT_PASSWORD=s3cr3t
-    ports:
-      - '15432:80'
-    depends_on:
-      flyway:
-        condition: service_completed_successfully
-  flyway:
-    container_name: flyway
+  pg-init:
+    container_name: pg-init
     image: flyway/flyway
     volumes:
       - ./flyway.toml:/flyway/conf/flyway.toml:ro
@@ -54,3 +41,26 @@ services:
     depends_on:
       pg:
         condition: service_healthy
+  pg-rest:
+    container_name: pg-rest
+    image: postgrest/postgrest
+    environment:
+      PGRST_DB_URI: postgres://admin:s3cr3t@pg:5432/movies
+      PGRST_DB_ANON_ROLE: admin
+      PGRST_OPENAPI_SERVER_PROXY_URI: http://127.0.0.1:3000
+    ports:
+      - '15432:3000'
+    depends_on:
+      pg-init:
+        condition: service_completed_successfully
+  pg-ui:
+    container_name: pg-ui
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=s3cr3t
+    ports:
+      - '15433:80'
+    depends_on:
+      pg-init:
+        condition: service_completed_successfully
