@@ -1,10 +1,17 @@
 @baseUrl = http://localhost:8080
 
-### Get movies
+### List movies
 GET {{baseUrl}}/movies
 Accept: application/json
 
-### Add Thing
+> {%
+  client.test("Response is correct", function () {
+    client.assert(response.status === 200);
+    client.assert(response.body.length === 0);
+  });
+%}
+
+### Create movie
 POST {{baseUrl}}/movies
 Content-Type: application/json
 
@@ -14,11 +21,24 @@ Content-Type: application/json
   "year": 1982
 }
 
-### Find Thing
+> {%
+  client.test("Done", function () {
+    client.assert(response.status === 204);
+  });
+%}
+
+### Find created movie
 GET {{baseUrl}}/movies/0084787
 Accept: application/json
 
-### Update Thing
+> {%
+  client.test("Done", function () {
+    client.assert(response.status === 200);
+    client.assert(response.body.imdb === "0084787");
+  });
+%}
+
+### Update movie
 PUT {{baseUrl}}/movies/0084787
 Content-Type: application/json
 
@@ -32,37 +52,39 @@ Content-Type: application/json
   ]
 }
 
-### Delete Thing
-DELETE {{baseUrl}}/movies/0084787
+> {%
+  client.test("Done", function () {
+    client.assert(response.status === 204);
+  });
+%}
 
-### Add Alien
-POST {{baseUrl}}/movies
-Content-Type: application/json
-
-{
-  "imdb": "0078748",
-  "title": "Alien",
-  "year": 1979,
-  "casts": []
-}
-
-### Find Alien
-GET {{baseUrl}}/movies/0078748
+### Find updated movie
+GET {{baseUrl}}/movies/0084787
 Accept: application/json
 
-### Update Alien
-PUT {{baseUrl}}/movies/0078748
-Content-Type: application/json
+> {%
+  client.test("Done", function () {
+    client.assert(response.status === 200);
+    client.assert(response.body.casts[0] == "Kurt Russell");
+    client.assert(response.body.casts[1] == "Wilford Brimley");
+  });
+%}
 
-{
-  "imdb": "0078748",
-  "title": "Alien",
-  "year": 1979,
-  "casts": [
-    "Sigourney Weaver",
-    "Tom Skerritt"
-  ]
-}
+### Delete movie
+DELETE {{baseUrl}}/movies/0084787
 
-### Delete Alien
-DELETE {{baseUrl}}/movies/0078748
+> {%
+  client.test("Done", function () {
+    client.assert(response.status === 204);
+  });
+%}
+
+### Find deleted movie
+GET {{baseUrl}}/movies/0084787
+Accept: application/json
+
+> {%
+  client.test("Done", function () {
+    client.assert(response.status === 404);
+  });
+%}
