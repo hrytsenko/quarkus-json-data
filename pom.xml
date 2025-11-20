@@ -16,6 +16,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.release>21</maven.compiler.release>
+
+    <nitrite.version>4.3.2</nitrite.version>
+    <lombok.version>1.18.38</lombok.version>
   </properties>
 
   <dependencyManagement>
@@ -65,13 +68,13 @@
     <dependency>
       <groupId>org.dizitart</groupId>
       <artifactId>nitrite</artifactId>
-      <version>4.3.0</version>
+      <version>${nitrite.version}</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.dizitart</groupId>
       <artifactId>nitrite-jackson-mapper</artifactId>
-      <version>4.3.0</version>
+      <version>${nitrite.version}</version>
     </dependency>
 
     <dependency>
@@ -100,7 +103,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.38</version>
+      <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -127,6 +130,13 @@
         <version>${compiler-plugin.version}</version>
         <configuration>
           <parameters>true</parameters>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
       <plugin>
