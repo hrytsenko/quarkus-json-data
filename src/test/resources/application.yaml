@@ -1,0 +1,6 @@
+app:
+  mode: 'standalone'
+
+quarkus:
+  hibernate-orm:
+    enabled: false
