@@ -1,7 +1,0 @@
-app:
-  mode: 'production'
-  database:
-    movies:
-      url: jdbc:postgresql://localhost:5432/movies
-      username: admin
-      password: s3cr3t
