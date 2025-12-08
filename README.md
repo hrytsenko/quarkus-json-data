@@ -2,21 +2,15 @@
 
 ## Approaches
 
-* **Standalone execution** — run the application without external dependencies.
+* **Standalone execution** — run or test the application without external dependencies.
 * **Externalized migrations** — apply migrations outside the application lifecycle.
-* **JSON data** — store entities as JSON objects in the database.
+* **JSON entities** — store entities as JSON objects.
 
 ## Tools
 
-Development:
-
 * [Nitrite](https://nitrite.dizitart.com/) — standalone database.
 * [PostgreSQL](https://www.postgresql.org/) — production database.
-* [Hibernate](https://hibernate.org/orm/) — persistence framework.
 * [Flyway](https://documentation.red-gate.com/flyway/) — migration tool.
-
-Testing:
-
-* [REST Assured](https://rest-assured.io/) — API testing.
-* [JsonUnit](https://github.com/lukas-krecan/JsonUnit/) — JSON comparison.
-* [Testcontainers](https://testcontainers.com/) — environment provisioning.
+* [pgAdmin](https://www.pgadmin.org/) — management tool.
+* [PostgREST](https://postgrest.org/) — data gateway.
+* [Hibernate](https://hibernate.org/orm/) — persistence framework.
