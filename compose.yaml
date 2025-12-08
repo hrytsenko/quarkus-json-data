@@ -4,8 +4,6 @@ services:
     image: hrytsenko/movies
     ports:
       - '8080:8080'
-    volumes:
-      - ./config/application.yaml:/deployments/config/application.yaml:ro
     environment:
       - APP_DATABASE_MOVIES_URL=jdbc:postgresql://pg:5432/movies
       - APP_DATABASE_MOVIES_USERNAME=admin
@@ -19,7 +17,7 @@ services:
   movies-health:
     container_name: movies-health
     image: curlimages/curl
-    command: ["sh", "-c", "while true; do sleep 3600; done"]
+    command: [ "sh", "-c", "while true; do sleep 3600; done" ]
     healthcheck:
       test: [ 'CMD', 'curl', '-fsS', 'http://movies:8080/q/health/ready' ]
       interval: 5s
