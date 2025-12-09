@@ -26,6 +26,14 @@ class MovieResource {
     return repository.listMovies();
   }
 
+  @GET
+  @Path("/{imdb}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Movie getMovie(@PathParam("imdb") String imdb) {
+    return repository.findMovie(imdb)
+        .orElseThrow(() -> new ClientErrorException("Movie not found", Response.Status.NOT_FOUND));
+  }
+
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public void createMovie(Movie movie) {
@@ -35,16 +43,9 @@ class MovieResource {
     repository.createMovie(movie);
   }
 
-  @GET
-  @Path("/{imdb}")
-  @Produces(MediaType.APPLICATION_JSON)
-  public Movie getMovie(@PathParam("imdb") String imdb) {
-    return repository.findMovie(imdb)
-        .orElseThrow(() -> new ClientErrorException("Movie not found", Response.Status.NOT_FOUND));
-  }
-
   @PUT
   @Path("/{imdb}")
+  @Consumes(MediaType.APPLICATION_JSON)
   public void updateMovie(@PathParam("imdb") String imdb, Movie movie) {
     if (!imdb.equals(movie.imdb())) {
       throw new ClientErrorException("Movie mismatch", Response.Status.BAD_REQUEST);
