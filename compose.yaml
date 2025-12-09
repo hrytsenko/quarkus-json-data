@@ -17,12 +17,11 @@ services:
   movies-health:
     container_name: movies-health
     image: curlimages/curl
-    command: [ "sh", "-c", "while true; do sleep 2000; done" ]
+    command: [ 'sh', '-c', 'while true; do sleep 2000; done' ]
     healthcheck:
       test: [ 'CMD', 'curl', '-fsS', 'http://movies:8080/q/health/ready' ]
-      interval: 5s
-      retries: 3
-      start_period: 5s
+      interval: 2s
+      start_period: 3s
     depends_on:
       movies:
         condition: service_started
