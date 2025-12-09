@@ -17,14 +17,15 @@ services:
   movies-health:
     container_name: movies-health
     image: curlimages/curl
-    command: [ "sh", "-c", "while true; do sleep 3600; done" ]
+    command: [ "sh", "-c", "while true; do sleep 2000; done" ]
     healthcheck:
       test: [ 'CMD', 'curl', '-fsS', 'http://movies:8080/q/health/ready' ]
       interval: 5s
-      retries: 6
+      retries: 3
       start_period: 5s
     depends_on:
-      - movies
+      movies:
+        condition: service_started
   pg:
     container_name: pg
     image: postgres
@@ -67,7 +68,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@example.com
       - PGADMIN_DEFAULT_PASSWORD=s3cr3t
     ports:
-      - '15433:80'
+      - '16432:80'
     depends_on:
       pg-init:
         condition: service_completed_successfully
