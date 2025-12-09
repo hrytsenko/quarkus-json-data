@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="app (test)" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="docker run --rm -t -v ${PWD}:/workdir jetbrains/intellij-http-client -D explore.rest" />
+  <configuration default="false" name="migrate" type="ShConfigurationType">
+    <option name="SCRIPT_TEXT" value="flyway clean migrate -environment=local -locations=filesystem:./migrations" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="stack (stop)" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="docker compose down" />
+  <configuration default="false" name="run" type="ShConfigurationType">
+    <option name="SCRIPT_TEXT" value="quarkus dev" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

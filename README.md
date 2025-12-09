@@ -14,3 +14,35 @@
 * [pgAdmin](https://www.pgadmin.org/) — management tool.
 * [PostgREST](https://postgrest.org/) — data gateway.
 * [Hibernate](https://hibernate.org/orm/) — persistence framework.
+
+## Commands
+
+Build:
+
+```shell
+docker compose build
+```
+
+Deploy:
+
+```shell
+docker compose up -d --wait
+```
+
+Undeploy:
+
+```shell
+docker compose down
+```
+
+Test:
+
+```shell
+docker run --rm -t -v ${PWD}:/workdir jetbrains/intellij-http-client -D explore.rest
+```
+
+Run (standalone):
+
+```shell
+quarkus dev "-Dapp.mode=standalone" "-Dquarkus.hibernate-orm.enabled=false"
+```
