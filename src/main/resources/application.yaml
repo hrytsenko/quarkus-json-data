@@ -21,8 +21,3 @@ quarkus:
     mapping:
       format:
         global: ignore
-  container-image:
-    builder: docker
-    group: hrytsenko
-    name: movies
-    tag: latest
