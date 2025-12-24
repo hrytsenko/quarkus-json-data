@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk-jammy AS build
+FROM eclipse-temurin:25-jdk-jammy AS build
 
 WORKDIR /build
 
@@ -9,7 +9,7 @@ RUN ./mvnw -q -B dependency:go-offline
 COPY src ./src
 RUN ./mvnw -q -B package
 
-FROM gcr.io/distroless/java21-debian12
+FROM gcr.io/distroless/java25-debian13
 
 WORKDIR /deploy
 
