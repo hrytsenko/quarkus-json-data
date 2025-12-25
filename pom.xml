@@ -8,15 +8,14 @@
   <version>1.0</version>
 
   <properties>
-    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.30.4</quarkus.platform.version>
+    <maven.compiler.release>25</maven.compiler.release>
     <compiler-plugin.version>3.14.1</compiler-plugin.version>
     <surefire-plugin.version>3.5.4</surefire-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.release>25</maven.compiler.release>
-
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+    <quarkus.platform.version>3.30.4</quarkus.platform.version>
     <nitrite.version>4.3.2</nitrite.version>
     <lombok.version>1.18.42</lombok.version>
   </properties>
@@ -113,7 +112,8 @@
         <extensions>true</extensions>
         <configuration>
           <jvmArgs>
-            --enable-native-access=ALL-UNNAMED --sun-misc-unsafe-memory-access=allow
+            --enable-native-access=ALL-UNNAMED
+            --sun-misc-unsafe-memory-access=allow
           </jvmArgs>
         </configuration>
         <executions>
@@ -144,13 +144,13 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
         <configuration>
-          <argLine>
-            --add-opens java.base/java.lang=ALL-UNNAMED
-          </argLine>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
+          <argLine>
+            --add-opens java.base/java.lang=ALL-UNNAMED
+          </argLine>
         </configuration>
       </plugin>
     </plugins>
