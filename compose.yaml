@@ -21,7 +21,7 @@ services:
     image: curlimages/curl
     command: [ 'sh', '-c', 'while true; do sleep 2000; done' ]
     healthcheck:
-      test: [ 'CMD', 'curl', '-fsS', 'http://movies:8080/q/health/ready' ]
+      test: ['CMD-SHELL', 'curl -sSf http://movies:8080/q/health/ready']
       interval: 2s
       start_period: 3s
     depends_on:
@@ -37,7 +37,7 @@ services:
     ports:
       - '5432:5432'
     healthcheck:
-      test: [ 'CMD', 'pg_isready', '-U', 'admin', '-d', 'movies' ]
+      test: ['CMD-SHELL', 'pg_isready -U admin']
       interval: 2s
       start_period: 3s
   pg-init:
