@@ -3,11 +3,12 @@ FROM eclipse-temurin:25-jdk-jammy AS build
 WORKDIR /build
 
 COPY mvnw pom.xml ./
-COPY .mvn ./.mvn
+COPY .mvn .mvn
+RUN chmod +x mvnw
 RUN ./mvnw -q -B dependency:go-offline
 
 COPY src ./src
-RUN ./mvnw -q -B package
+RUN ./mvnw -q -B clean package
 
 FROM gcr.io/distroless/java25-debian13
 
