@@ -1,19 +1,15 @@
 # Quarkus JSON Data
 
-## Approaches
+Practical application of an iterative approach to evolving the persistence layer. \
+Suitable for focusing on contracts and business logic while evolving the data model. \
+Avoids overhead from schema management and complex deployments.
 
-* **Standalone execution** — run or test the application without external dependencies.
-* **Externalized migrations** — apply migrations outside the application lifecycle.
-* **JSON entities** — store entities as JSON objects.
+## Flow
 
-## Tools
-
-* [Nitrite](https://nitrite.dizitart.com/) — standalone database.
-* [PostgreSQL](https://www.postgresql.org/) — production database.
-* [Flyway](https://documentation.red-gate.com/flyway/) — migration tool.
-* [pgAdmin](https://www.pgadmin.org/) — management tool.
-* [PostgREST](https://postgrest.org/) — data gateway.
-* [Hibernate](https://hibernate.org/orm/) — persistence framework.
+1. Use [Nitrite](https://nitrite.dizitart.com/) to move fast during early development.
+2. Stabilize the data model through iteration.
+3. Eventually, shift to [PostgreSQL](https://www.postgresql.org/) for production use.
+4. Optionally, continue to use Nitrite for fast and simple testing.
 
 ## Commands
 
@@ -32,7 +28,7 @@ docker compose up -d --wait
 Undeploy:
 
 ```shell
-docker compose down
+docker compose down -v
 ```
 
 Test:
