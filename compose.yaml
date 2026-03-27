@@ -70,6 +70,8 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=s3cr3t
     ports:
       - '16432:80'
+    volumes:
+      - ./pgadmin.json:/pgadmin4/servers.json:ro
     depends_on:
       pg-init:
         condition: service_completed_successfully

@@ -1,0 +1,12 @@
+{
+  "Servers": {
+    "movies": {
+      "Name": "movies",
+      "Group": "default",
+      "Host": "pg",
+      "Port": 5432,
+      "MaintenanceDB": "postgres",
+      "Username": "admin"
+    }
+  }
+}
