@@ -1,11 +1,7 @@
 [flyway]
 cleanDisabled = false
 
-[environments.local]
-url = "jdbc:postgresql://localhost:5432/movies"
-user = "admin"
-password = "s3cr3t"
 [environments.docker]
-url = "jdbc:postgresql://pg:5432/movies"
-user = "admin"
-password = "s3cr3t"
+url = "${env.MOVIES_DB_URL}"
+user = "${env.MOVIES_DB_USERNAME}"
+password = "${env.MOVIES_DB_PASSWORD}"

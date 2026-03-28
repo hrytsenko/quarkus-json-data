@@ -43,6 +43,10 @@ services:
   pg-init:
     container_name: pg-init
     image: flyway/flyway
+    environment:
+      - MOVIES_DB_URL=jdbc:postgresql://pg:5432/movies
+      - MOVIES_DB_USERNAME=admin
+      - MOVIES_DB_PASSWORD=s3cr3t
     volumes:
       - ./flyway.toml:/flyway/flyway.toml:ro
       - ./migrations:/flyway/migrations:ro
