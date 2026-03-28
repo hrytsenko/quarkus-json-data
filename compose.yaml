@@ -7,9 +7,9 @@ services:
     ports:
       - '8080:8080'
     environment:
-      - APP_DATABASE_MOVIES_URL=jdbc:postgresql://pg:5432/movies
-      - APP_DATABASE_MOVIES_USERNAME=admin
-      - APP_DATABASE_MOVIES_PASSWORD=s3cr3t
+      APP_DATABASE_MOVIES_URL: jdbc:postgresql://pg:5432/movies
+      APP_DATABASE_MOVIES_USERNAME: admin
+      APP_DATABASE_MOVIES_PASSWORD: s3cr3t
     depends_on:
       pg-init:
         condition: service_completed_successfully
@@ -21,7 +21,7 @@ services:
     image: curlimages/curl
     command: [ 'sh', '-c', 'while true; do sleep 2000; done' ]
     healthcheck:
-      test: ['CMD-SHELL', 'curl -sSf http://movies:8080/q/health/ready']
+      test: [ 'CMD-SHELL', 'curl -sSf http://movies:8080/q/health/ready' ]
       interval: 2s
       start_period: 3s
     depends_on:
@@ -31,22 +31,22 @@ services:
     container_name: pg
     image: postgres
     environment:
-      - POSTGRES_DB=movies
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=s3cr3t
+      POSTGRES_DB: movies
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: s3cr3t
     ports:
       - '5432:5432'
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U admin']
+      test: [ 'CMD-SHELL', 'pg_isready -U admin' ]
       interval: 2s
       start_period: 3s
   pg-init:
     container_name: pg-init
     image: flyway/flyway
     environment:
-      - MOVIES_DB_URL=jdbc:postgresql://pg:5432/movies
-      - MOVIES_DB_USERNAME=admin
-      - MOVIES_DB_PASSWORD=s3cr3t
+      MOVIES_DB_URL: jdbc:postgresql://pg:5432/movies
+      MOVIES_DB_USERNAME: admin
+      MOVIES_DB_PASSWORD: s3cr3t
     volumes:
       - ./flyway.toml:/flyway/flyway.toml:ro
       - ./migrations:/flyway/migrations:ro
@@ -70,8 +70,8 @@ services:
     container_name: pg-ui
     image: dpage/pgadmin4
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@example.com
-      - PGADMIN_DEFAULT_PASSWORD=s3cr3t
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: s3cr3t
     ports:
       - '16432:80'
     volumes:
