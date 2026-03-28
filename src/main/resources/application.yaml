@@ -2,9 +2,9 @@ app:
   mode: 'production'
   database:
     movies:
-      url: jdbc:postgresql://localhost:5432/movies
-      username: admin
-      password: s3cr3t
+      url: jdbc:postgresql://localhost:5432/${MOVIES_DB_NAME}
+      username: ${SA_USERNAME}
+      password: ${SA_PASSWORD}
 
 quarkus:
   datasource:
