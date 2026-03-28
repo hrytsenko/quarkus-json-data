@@ -6,10 +6,12 @@ services:
     image: hrytsenko/movies
     ports:
       - '8080:8080'
+    env_file:
+      - .env
     environment:
-      APP_DATABASE_MOVIES_URL: jdbc:postgresql://pg:5432/movies
-      APP_DATABASE_MOVIES_USERNAME: admin
-      APP_DATABASE_MOVIES_PASSWORD: s3cr3t
+      APP_DATABASE_MOVIES_URL: jdbc:postgresql://pg:5432/${MOVIES_DB_NAME}
+      APP_DATABASE_MOVIES_USERNAME: ${SA_USERNAME}
+      APP_DATABASE_MOVIES_PASSWORD: ${SA_PASSWORD}
     depends_on:
       pg-init:
         condition: service_completed_successfully
@@ -30,10 +32,12 @@ services:
   pg:
     container_name: pg
     image: postgres
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: movies
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: s3cr3t
+      POSTGRES_DB: ${MOVIES_DB_NAME}
+      POSTGRES_USER: ${SA_USERNAME}
+      POSTGRES_PASSWORD: ${SA_PASSWORD}
     ports:
       - '5432:5432'
     healthcheck:
@@ -43,10 +47,12 @@ services:
   pg-init:
     container_name: pg-init
     image: flyway/flyway
+    env_file:
+      - .env
     environment:
-      MOVIES_DB_URL: jdbc:postgresql://pg:5432/movies
-      MOVIES_DB_USERNAME: admin
-      MOVIES_DB_PASSWORD: s3cr3t
+      MOVIES_DB_URL: jdbc:postgresql://pg:5432/${MOVIES_DB_NAME}
+      MOVIES_DB_USERNAME: ${SA_USERNAME}
+      MOVIES_DB_PASSWORD: ${SA_PASSWORD}
     volumes:
       - ./flyway.toml:/flyway/flyway.toml:ro
       - ./migrations:/flyway/migrations:ro
@@ -57,9 +63,11 @@ services:
   pg-rest:
     container_name: pg-rest
     image: postgrest/postgrest
+    env_file:
+      - .env
     environment:
-      PGRST_DB_URI: postgres://admin:s3cr3t@pg:5432/movies
-      PGRST_DB_ANON_ROLE: admin
+      PGRST_DB_URI: postgres://${SA_USERNAME}:${SA_PASSWORD}@pg:5432/${MOVIES_DB_NAME}
+      PGRST_DB_ANON_ROLE: ${SA_USERNAME}
       PGRST_OPENAPI_SERVER_PROXY_URI: http://127.0.0.1:3000
     ports:
       - '15432:3000'
@@ -69,9 +77,11 @@ services:
   pg-ui:
     container_name: pg-ui
     image: dpage/pgadmin4
+    env_file:
+      - .env
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: s3cr3t
+      PGADMIN_DEFAULT_EMAIL: ${SA_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${SA_PASSWORD}
     ports:
       - '16432:80'
     volumes:

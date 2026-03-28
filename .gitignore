@@ -4,6 +4,3 @@ target/
 # IDEA
 .idea
 *.iml
-
-# Environment
-.env
