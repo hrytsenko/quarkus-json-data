@@ -16,7 +16,7 @@ class MovieTest {
 
   @Test
   @Order(1)
-  public void createMovie() {
+  void createMovie() {
     given()
         .body("""
             {
@@ -65,7 +65,7 @@ class MovieTest {
 
   @Test
   @Order(2)
-  public void updateMovie() {
+  void updateMovie() {
     given()
         .body("""
             {
@@ -123,7 +123,7 @@ class MovieTest {
 
   @Test
   @Order(3)
-  public void deleteMovie() {
+  void deleteMovie() {
     given()
         .when().delete("/movies/0084787")
         .then().statusCode(204);
