@@ -28,5 +28,5 @@ jobs:
           ./mvnw -B verify
           org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
           -Dsonar.organization=hrytsenko
-          -Dsonar.projectKey=hrytsenko_quarkus-config-secret
+          -Dsonar.projectKey=hrytsenko_quarkus-json-data
           -Pcoverage
