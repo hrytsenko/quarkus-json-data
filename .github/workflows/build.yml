@@ -9,19 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: Prepare environment
+      - name: Setup Java
         uses: actions/setup-java@v5
         with:
           java-version: '25'
           distribution: 'temurin'
           cache: 'maven'
-      - name: Configure Wrapper
+      - name: Configure Maven
         run: chmod +x mvnw
-      - name: Build application
+      - name: Build Java
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: >
