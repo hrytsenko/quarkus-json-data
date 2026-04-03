@@ -4,24 +4,24 @@ services:
   movies:
     container_name: movies
     image: hrytsenko/movies
-    ports:
-      - '8080:8080'
+    build:
+      context: .
+      dockerfile: Dockerfile
     env_file:
       - .env
     environment:
       APP_DATABASE_MOVIES_URL: jdbc:postgresql://pg:5432/${MOVIES_DB_NAME}
       APP_DATABASE_MOVIES_USERNAME: ${SA_USERNAME}
       APP_DATABASE_MOVIES_PASSWORD: ${SA_PASSWORD}
+    ports:
+      - '8080:8080'
     depends_on:
       pg-init:
         condition: service_completed_successfully
-    build:
-      context: .
-      dockerfile: Dockerfile
   movies-health:
     container_name: movies-health
     image: curlimages/curl
-    command: [ 'sh', '-c', 'while true; do sleep 2000; done' ]
+    command: sleep infinity
     healthcheck:
       test: [ 'CMD-SHELL', 'curl -sSf http://movies:8080/q/health/ready' ]
       interval: 2s
@@ -53,10 +53,10 @@ services:
       MOVIES_DB_URL: jdbc:postgresql://pg:5432/${MOVIES_DB_NAME}
       MOVIES_DB_USERNAME: ${SA_USERNAME}
       MOVIES_DB_PASSWORD: ${SA_PASSWORD}
+    command: -configFiles=/flyway/flyway.toml migrate -environment=docker -locations=filesystem:/flyway/migrations
     volumes:
       - ./flyway.toml:/flyway/flyway.toml:ro
       - ./migrations:/flyway/migrations:ro
-    command: -configFiles=/flyway/flyway.toml migrate -environment=docker -locations=filesystem:/flyway/migrations
     depends_on:
       pg:
         condition: service_healthy
